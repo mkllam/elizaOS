@@ -1,4 +1,4 @@
-import pino, { LogFn } from "pino";
+import pino, { type LogFn } from "pino";
 import pretty from "pino-pretty";
 
 const customLevels: Record<string, number> = {
@@ -26,7 +26,10 @@ const createStream = () => {
     });
 };
 
+const defaultLevel = process?.env?.DEFAULT_LOG_LEVEL || "info";
+
 const options = {
+    level: defaultLevel,
     customLevels,
     hooks: {
         logMethod(
